@@ -1,2 +1,2 @@
-from .home import *
+from .main import *
 from .post import *

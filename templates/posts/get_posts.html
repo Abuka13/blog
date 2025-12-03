@@ -2,17 +2,323 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Posts</title>
+
+    <!-- Иконки Font Awesome (если нужны в панелях) -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400&family=Raleway:wght@300&display=swap");
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Josefin Sans", sans-serif;
+      }
+      /* уменьшаем всё содержимое, кроме фона */
+
+
+      body {
+        background: var(--bg);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;  /* сверху панели, ниже карточки */
+      }
+
+      /* ====== ПАНЕЛИ СВЕРХУ ====== */
+      :root {
+        --bg: #222;
+        --clr: #fff;
+      }
+
+      .top-bar {
+        background: var(--bg);
+        display: flex;
+        justify-content: center;
+        padding: 20px 0;
+      }
+
+      .top-bar ul {
+        position: relative;
+        display: flex;
+        gap: 50px;
+      }
+
+      .top-bar ul li {
+        position: relative;
+        list-style: none;
+        width: 70px;
+        height: 70px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        transition: 0.5s;
+      }
+
+      .top-bar ul li::before {
+        content: '';
+        position: absolute;
+        inset: 30px;
+        box-shadow: 0 0 0 10px var(--clr),
+                    0 0 0 20px var(--bg),
+                    0 0 0 22px var(--clr);
+        transition: 0.5s;
+      }
+
+      .top-bar ul li:hover::before {
+        inset: 15px;
+      }
+
+      .top-bar ul li::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: var(--bg);
+        transform: rotate(45deg);
+        transition: 0.5s;
+      }
+
+      .top-bar ul li:hover::after {
+        inset: 0px;
+        transform: rotate(0deg);
+      }
+
+      .top-bar ul li a {
+        position: relative;
+        text-decoration: none;
+        z-index: 10;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .top-bar ul li a i {
+        font-size: 2em;
+        transition: 0.5s;
+        color: var(--clr);
+        opacity: 1;
+      }
+
+      .top-bar ul li:hover a i {
+        color: var(--clr);
+        transform: translateY(-40%);
+      }
+
+      .top-bar ul li a span {
+        position: absolute;
+        font-family: sans-serif;
+        color: var(--clr);
+        opacity: 0;
+        transition: 0.5s;
+        transform: scale(0) translateY(200%);
+      }
+
+      .top-bar ul li:hover a span {
+        opacity: 1;
+        transform: scale(1) translateY(100%);
+      }
+
+      .top-bar ul li:hover a i,
+      .top-bar ul li a span {
+        filter: drop-shadow(0 0 20px var(--clr))
+                drop-shadow(0 0 40px var(--clr))
+                drop-shadow(0 0 60px var(--clr));
+      }
+
+      /* ====== КАРТОЧКИ ====== */
+
+      .cards-wrapper {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px 0;
+      }
+
+      .cards {
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .card {
+        position: relative;
+        height: 350px;
+        width: 250px;
+        background-color: #cdcdcd;
+        transition: 0.5s;
+        cursor: pointer;
+      }
+
+      .face {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+
+      .face1 {
+        text-align: center;
+        padding: 20px;
+        color: #222222FF;
+        transition: 0.5s;
+      }
+
+      .face1 h2 {
+        text-transform: uppercase;
+        margin-top: 80px;
+      }
+
+      .face1 p {
+        text-align: center;
+      }
+
+      .face1 a {
+        margin-top: 20px;
+        padding: 5px 10px;
+        border-radius: 2px;
+        text-decoration: none;
+        color: #222222FF;
+        border: 2px solid #222222FF;
+        text-transform: capitalize;
+        transition: 0.3s;
+      }
+
+      .face2 {
+        background-color: #F2A90A;
+        transition: 0.5s;
+      }
+
+      .face2 h2 {
+        font-size: 120px;
+        color: white;
+        transition: 0.5s;
+      }
+
+      .face1 a:hover {
+        background: #222222FF;
+        color: white;
+      }
+
+      .card:hover .face2 {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        top: 50px;
+        left: 34%;
+        background-color: #cdcdcd ;
+        border: 1px solid #222222FF;
+      }
+
+      .card:hover .face2 h2 {
+        font-size: 30px;
+        color: #222222FF;
+      }
+
+      /* ====== ПАГИНАЦИЯ ====== */
+
+      .pagination {
+        text-align: center;
+        margin: 20px 0 30px;
+      }
+
+      .pagination a,
+      .pagination span {
+        margin: 0 5px;
+        text-decoration: none;
+        color: #ffc80c;
+      }
+
+      .pagination .current-page {
+        font-weight: bold;
+      }
+    </style>
 </head>
 <body>
-    {% for post in posts %}
-        <hr>
-        <h2>{{ post.author }}</h2>
-        <h2>{{ post.title }}</h2>
-        <h2>{{ post.description| slice:"5" }}...</h2>
-        <h2>{{ post.created_at }}</h2>
-        <a href="{% url 'post_detail' post.id %}">Читать</a>
 
-    {% endfor %}
+  <!-- ВЕРХНИЕ ПАНЕЛИ -->
+      <div class="top-bar">
+        <ul>
+          <li style="--clr:#F2A90A;">
+            <a href="#">
+              <i class="fa-solid fa-house"></i>
+              <span>Home</span>
+            </a>
+          </li>
+
+          <li style="--clr:#F2A90A;">
+            <a href="#">
+              <i class="fa-solid fa-user"></i>
+              <span>Profile</span>
+            </a>
+          </li>
+
+          <li style="--clr:#F2A90A;">
+            <a href="#">
+              <i class="fa-solid fa-heart"></i>
+              <span>Likes</span>
+            </a>
+          </li>
+
+          <li style="--clr:#F2A90A;">
+            <a href="#">
+              <i class="fa-solid fa-gear"></i>
+              <span>Settings</span>
+            </a>
+          </li>
+
+          <li style="--clr:#F2A90A;">
+            <a href="#">
+              <i class="fa-solid fa-magnifying-glass"></i>
+              <span>Search</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- КАРТОЧКИ ПОСТОВ -->
+      <div class="cards-wrapper">
+        <div class="cards">
+          {% for post in current_page %}
+            <div class="card">
+              <div class="face face1">
+                <h2>{{ post.title|slice:"30" }} </h2>
+                <p>{{ post.description|slice:"150" }}...</p>
+                <a href="{% url 'post_detail' post.id %}">Read more</a>
+              </div>
+              <div class="face face2">
+                <h2 style="color:#222222FF">{{ post.id }}</h2>
+              </div>
+            </div>
+          {% empty %}
+            <p>Постов пока нет.</p>
+          {% endfor %}
+        </div>
+      </div>
+
+      <!-- ПАГИНАЦИЯ -->
+      <div class="pagination">
+        {% if current_page.has_previous %}
+          <a href="?page={{ current_page.previous_page_number }}">Previous</a>
+        {% endif %}
+
+        <span class="current-page">
+          Page {{ current_page.number }} of {{ current_page.paginator.num_pages }}
+        </span>
+
+        {% if current_page.has_next %}
+          <a href="?page={{ current_page.next_page_number }}">Next</a>
+        {% endif %}
+      </div>
+
 </body>
 </html>
