@@ -27,106 +27,7 @@
         flex-direction: column;  /* сверху панели, ниже карточки */
       }
 
-      /* ====== ПАНЕЛИ СВЕРХУ ====== */
-      :root {
-        --bg: #222;
-        --clr: #fff;
-      }
 
-      .top-bar {
-        background: var(--bg);
-        display: flex;
-        justify-content: center;
-        padding: 20px 0;
-      }
-
-      .top-bar ul {
-        position: relative;
-        display: flex;
-        gap: 50px;
-      }
-
-      .top-bar ul li {
-        position: relative;
-        list-style: none;
-        width: 70px;
-        height: 70px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        cursor: pointer;
-        transition: 0.5s;
-      }
-
-      .top-bar ul li::before {
-        content: '';
-        position: absolute;
-        inset: 30px;
-        box-shadow: 0 0 0 10px var(--clr),
-                    0 0 0 20px var(--bg),
-                    0 0 0 22px var(--clr);
-        transition: 0.5s;
-      }
-
-      .top-bar ul li:hover::before {
-        inset: 15px;
-      }
-
-      .top-bar ul li::after {
-        content: '';
-        position: absolute;
-        inset: 0;
-        background: var(--bg);
-        transform: rotate(45deg);
-        transition: 0.5s;
-      }
-
-      .top-bar ul li:hover::after {
-        inset: 0px;
-        transform: rotate(0deg);
-      }
-
-      .top-bar ul li a {
-        position: relative;
-        text-decoration: none;
-        z-index: 10;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-
-      .top-bar ul li a i {
-        font-size: 2em;
-        transition: 0.5s;
-        color: var(--clr);
-        opacity: 1;
-      }
-
-      .top-bar ul li:hover a i {
-        color: var(--clr);
-        transform: translateY(-40%);
-      }
-
-      .top-bar ul li a span {
-        position: absolute;
-        font-family: sans-serif;
-        color: var(--clr);
-        opacity: 0;
-        transition: 0.5s;
-        transform: scale(0) translateY(200%);
-      }
-
-      .top-bar ul li:hover a span {
-        opacity: 1;
-        transform: scale(1) translateY(100%);
-      }
-
-      .top-bar ul li:hover a i,
-      .top-bar ul li a span {
-        filter: drop-shadow(0 0 20px var(--clr))
-                drop-shadow(0 0 40px var(--clr))
-                drop-shadow(0 0 60px var(--clr));
-      }
 
       /* ====== КАРТОЧКИ ====== */
 
@@ -224,67 +125,13 @@
         color: #222222FF;
       }
 
-      /* ====== ПАГИНАЦИЯ ====== */
 
-      .pagination {
-        text-align: center;
-        margin: 20px 0 30px;
-      }
-
-      .pagination a,
-      .pagination span {
-        margin: 0 5px;
-        text-decoration: none;
-        color: #ffc80c;
-      }
-
-      .pagination .current-page {
-        font-weight: bold;
-      }
     </style>
 </head>
 <body>
 
-  <!-- ВЕРХНИЕ ПАНЕЛИ -->
-      <div class="top-bar">
-        <ul>
-          <li style="--clr:#F2A90A;">
-            <a href="#">
-              <i class="fa-solid fa-house"></i>
-              <span>Home</span>
-            </a>
-          </li>
 
-          <li style="--clr:#F2A90A;">
-            <a href="#">
-              <i class="fa-solid fa-user"></i>
-              <span>Profile</span>
-            </a>
-          </li>
-
-          <li style="--clr:#F2A90A;">
-            <a href="#">
-              <i class="fa-solid fa-heart"></i>
-              <span>Likes</span>
-            </a>
-          </li>
-
-          <li style="--clr:#F2A90A;">
-            <a href="#">
-              <i class="fa-solid fa-gear"></i>
-              <span>Settings</span>
-            </a>
-          </li>
-
-          <li style="--clr:#F2A90A;">
-            <a href="#">
-              <i class="fa-solid fa-magnifying-glass"></i>
-              <span>Search</span>
-            </a>
-          </li>
-        </ul>
-      </div>
-
+    {% include "header/header.html" %}
       <!-- КАРТОЧКИ ПОСТОВ -->
       <div class="cards-wrapper">
         <div class="cards">
@@ -304,21 +151,7 @@
           {% endfor %}
         </div>
       </div>
-
-      <!-- ПАГИНАЦИЯ -->
-      <div class="pagination">
-        {% if current_page.has_previous %}
-          <a href="?page={{ current_page.previous_page_number }}">Previous</a>
-        {% endif %}
-
-        <span class="current-page">
-          Page {{ current_page.number }} of {{ current_page.paginator.num_pages }}
-        </span>
-
-        {% if current_page.has_next %}
-          <a href="?page={{ current_page.next_page_number }}">Next</a>
-        {% endif %}
-      </div>
+      {% include "paginator/paginator.html" %}
 
 </body>
 </html>
