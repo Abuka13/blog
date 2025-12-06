@@ -18,7 +18,7 @@ def post_detail(request, pk):
     post = models.Post.objects.get(id=pk)
     return render(request, 'posts/post_detail.html', context={"post":post})
 
-
+@login_required
 def post_form(request):
     if request.method == "GET":
         return render(request, 'posts/post_form.html')
