@@ -3,169 +3,150 @@
 <head>
     <meta charset="UTF-8">
     <title>Auth</title>
-
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <style>
-@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
-
-* { box-sizing: border-box; }
-
-body {
-    background: #222222;
-    font-family: 'Montserrat', sans-serif;
-    min-height: 100vh;
-    margin: 0;
-    color: #F5F5F5;
-    display: flex;
-    flex-direction: column;   /* теперь элементы идут сверху вниз */
-}
-
-.page-main {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;   /* центрирует контейнер по экрану */
-    margin-bottom: 5%;
-}
-
-
-h1 { font-weight: bold; margin: 0; }
-
-p {
-    font-size: 14px;
-    font-weight: 100;
-    line-height: 20px;
-    letter-spacing: 0.5px;
-    margin: 20px 0 30px;
-}
-
-span { font-size: 12px; }
-
-a {
-    color: #F2A90A;
-    font-size: 14px;
-    text-decoration: none;
-    margin: 15px 0;
-}
-
-button {
-    border-radius: 20px;
-    border: 1px solid #F2A90A;
-    background-color: #F2A90A;
-    color: #222222;
-    font-size: 12px;
-    font-weight: bold;
-    padding: 12px 45px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    margin-top: 15%;
-    transition: transform 80ms ease-in, background-color 150ms, color 150ms;
-    cursor: pointer;
-}
-button:hover { background-color: #ffc80c; }
-button:active { transform: scale(0.95); }
-button:focus { outline: none; }
-
-.container {
-    background-color: #111111;
-    border-radius: 10px;
-    box-shadow: 0 14px 28px rgba(0,0,0,0.5),
-                0 10px 10px rgba(0,0,0,0.35);
-    width: 768px;
-    max-width: 100%;
-    min-height: 420px;
-    display: flex;
-    overflow: hidden;
-}
-
-/* левая половина — текст Hello Friend */
-.info-panel {
-    width: 50%;
-    background: linear-gradient(135deg, #F2A90A, #ffc80c);
-    color: #222222;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 0 40px;
-    text-align: center;
-}
-
-/* правая половина — форма sign up */
-.form-panel {
-    width: 50%;
-    background-color: #2b2b2b;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0 40px;
-}
-
-form {
-    width: 100%;
-    max-width: 260px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-}
-
-input {
-    background-color: #3a3a3a;
-    border: 1px solid #555;
-    padding: 12px 15px;
-    margin: 8px 0;
-    width: 100%;
-    color: #F5F5F5;
-}
-input::placeholder { color: #bbbbbb; }
-
-.social-container {
-    margin: 20px 0;
-}
-.social-container a {
-    border: 1px solid #444;
-    border-radius: 50%;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0 5px;
-    height: 40px;
-    width: 40px;
-    color: #F5F5F5;
-}
-.social-container a:hover {
-    border-color: #F2A90A;
-    color: #F2A90A;
-}
+        @import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+        * { box-sizing: border-box; }
+        body {
+            background: #222222;
+            font-family: 'Montserrat', sans-serif;
+            min-height: 100vh;
+            margin: 0;
+            color: #F5F5F5;
+            display: flex;
+            flex-direction: column;
+        }
+        .page-main {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 5%;
+        }
+        h1 { font-weight: bold; margin: 0; }
+        p { font-size: 14px; font-weight: 100; line-height: 20px; letter-spacing: 0.5px; margin: 20px 0 30px; }
+        span { font-size: 12px; }
+        a { color: #F2A90A; font-size: 14px; text-decoration: none; margin: 15px 0; }
+        button {
+            border-radius: 20px;
+            border: 1px solid #F2A90A;
+            background-color: #F2A90A;
+            color: #222222;
+            font-size: 12px;
+            font-weight: bold;
+            padding: 12px 45px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-top: 15%;
+            transition: transform 80ms ease-in, background-color 150ms, color 150ms;
+            cursor: pointer;
+        }
+        button:hover { background-color: #ffc80c; }
+        button:active { transform: scale(0.95); }
+        button:focus { outline: none; }
+        .container {
+            background-color: #111111;
+            border-radius: 10px;
+            box-shadow: 0 14px 28px rgba(0,0,0,0.5), 0 10px 10px rgba(0,0,0,0.35);
+            width: 768px;
+            max-width: 100%;
+            min-height: 420px;
+            display: flex;
+            overflow: hidden;
+        }
+        .info-panel {
+            width: 50%;
+            background: linear-gradient(135deg, #F2A90A, #ffc80c);
+            color: #222222;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 0 40px;
+            text-align: center;
+        }
+        .form-panel {
+            width: 50%;
+            background-color: #2b2b2b;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 40px;
+        }
+        form {
+            width: 100%;
+            max-width: 260px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        input, textarea {
+            background-color: #3a3a3a;
+            border: 1px solid #555;
+            padding: 12px 15px;
+            margin: 8px 0;
+            width: 100%;
+            color: #F5F5F5;
+        }
+        input::placeholder, textarea::placeholder { color: #bbbbbb; }
+        .errorlist { color: red; font-size: 12px; margin: 0 0 5px 0; list-style: none; padding: 0; }
+        .social-container { margin: 20px 0; }
+        .social-container a {
+            border: 1px solid #444;
+            border-radius: 50%;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 5px;
+            height: 40px;
+            width: 40px;
+            color: #F5F5F5;
+        }
+        .social-container a:hover { border-color: #F2A90A; color: #F2A90A; }
     </style>
 </head>
 <body>
-{% include "header/header.html"  %}
-<div class="page-main">
-    <div class="container">
-        <div class="info-panel">
-            <h1>Hello, Friend!</h1>
-            <p>Enter your personal details and start journey with us</p>
-        </div>
+    {% include "header/header.html" %}
+    <div class="page-main">
+        <div class="container">
+            <div class="info-panel">
+                <h1>Hello, Friend!</h1>
+                <p>Enter your personal details and start journey with us</p>
+            </div>
+            <div class="form-panel">
+                <form action="{% url 'post_form' %}" method="POST">
+                    {% csrf_token %}
+                    <h1>Create Post</h1>
 
-        <div class="form-panel">
-            <form action="{% url 'post_form' %}" method="POST" enctype="multipart/form-data">
-                {% csrf_token %}
-                <h1>Create Post</h1>
-                <div class="social-container">
-                    <a href="#" class="social"><i class="fa fa-calendar"></i></a>
-                    <a href="#" class="social"><i class="fa fa-address-book"></i></a>
-                    <a href="#" class="social"><i class="fa fa-comment"></i></a>
-                </div>
-                <input name="title" type="text" placeholder="title" />
-                <input style="padding: 20px 15px;" name="description" type="text" placeholder="description" />
-                <button type="submit">Create</button>
-            </form>
+                    <!-- Поля формы -->
+                    <div class="social-container">
+                        <a href="#" class="social"><i class="fa fa-calendar"></i></a>
+                        <a href="#" class="social"><i class="fa fa-address-book"></i></a>
+                        <a href="#" class="social"><i class="fa fa-comment"></i></a>
+                    </div>
+
+                    <!-- Ошибки формы в целом -->
+                    {% if form.non_field_errors %}
+                        <ul class="errorlist">
+                            {% for error in form.non_field_errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+
+                    <!-- Title -->
+                    {{ form.title.errors }}
+                    {{ form.title }}
+
+                    <!-- Description -->
+                    {{ form.description.errors }}
+                    {{ form.description }}
+
+                    <button type="submit">Create</button>
+                </form>
+            </div>
         </div>
     </div>
-</div>
 </body>
 </html>

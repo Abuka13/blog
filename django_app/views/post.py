@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse
-
+from django_app.forms import PostForm
 from django_app import models
 from django.core.paginator import Paginator
 
@@ -18,18 +18,21 @@ def post_detail(request, pk):
     post = models.Post.objects.get(id=pk)
     return render(request, 'posts/post_detail.html', context={"post":post})
 
-@login_required
 def post_form(request):
+    form = PostForm()
     if request.method == "GET":
-        return render(request, 'posts/post_form.html')
+        form = PostForm()
+        return render(request, 'posts/post_form.html', {"form": form})
     elif request.method == "POST":
-        author = request.user
-        title = str(request.POST["title"])
-        description = str(request.POST["description"])
-        models.Post.objects.create(
-            author = author,
-            title = title,
-            description = description
-        )
-        return redirect(reverse(get_posts))
+        form = PostForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user
+            post.save()
+            return redirect(reverse(get_posts))
+    return render(
+        request,
+        "posts/post_form.html",
+        {"form": form}
+    )
 
